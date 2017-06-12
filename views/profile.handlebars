@@ -1,0 +1,35 @@
+{{#with user}}
+    <div class="list-group">
+        
+        {{#if facebook.username}}
+            <a href="#" class="list-group-item active">
+            User Info
+        </a>
+            <a href="#" class="list-group-item">Name: {{facebook.username}}</a>
+            <a href="#" class="list-group-item">Email: {{facebook.email}}</a>
+       
+       {{else if twitter.id}}
+            <a href="#" class="list-group-item active">
+            <img class="img-responsive" src="{{twitter.photos}}" alt="">
+
+        </a>
+            
+            <a href="#" class="list-group-item">Name: {{twitter.username}}</a>
+            <a href="#" class="list-group-item">Email: {{twitter.email}}</a>
+       {{else if google.id}}
+            <a href="#" class="list-group-item active">
+            <img class="img-responsive" src="{{google.photos}}" alt="">
+
+        </a>
+            
+            <a href="#" class="list-group-item">Name: {{google.displayName}}</a>
+            <a href="#" class="list-group-item">Email: {{google.email}}</a>
+       
+         {{else if username}}
+                       
+            <a href="#" class="list-group-item">Name: {{username}}</a>
+            <a href="#" class="list-group-item">Email: {{email}}</a>
+        {{/if}}
+       </div>    
+
+{{/with}}

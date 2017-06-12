@@ -1,0 +1,26 @@
+<div id="status"></div>
+
+{{#with user}}
+        {{#if facebook.username}}
+         <h1>
+            Welcome  {{facebook.username}}
+        </h1>
+       {{/if}}
+        {{#if twitter.username}}
+         <h1>
+            Welcome  {{twitter.username}}
+        </h1>
+        {{/if}}
+        {{#if google.displayName}}
+         <h1>
+            Welcome  {{google.displayName}}
+        </h1>
+        {{/if}}
+        {{#if username}}
+         <h1>
+            Welcome  {{username}}
+        </h1>
+        {{/if}}
+      
+
+{{/with}}

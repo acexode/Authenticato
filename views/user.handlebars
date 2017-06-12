@@ -1,0 +1,25 @@
+
+<form action="/users/register" method="POST" role="form">
+    <legend>Form title</legend>
+     {{#if errors}}
+           {{#each errors}}
+                        <div class="alert alert-danger">{{msg}}</div>
+                    {{/each}}
+        {{/if}}
+    <div class="form-group">
+        <label >Email</label>
+        <input type="text" name="email" class="form-control" id="" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label >Username</label>
+        <input type="text" name="username" class="form-control" id="" placeholder="Username">
+    </div>
+    <div class="form-group">
+        <label >Password</label>
+        <input type="password" name="password" class="form-control" id="" placeholder="password">
+    </div>
+
+    
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
