@@ -1,6 +1,7 @@
 const express = require('express'),
     path = require('path'),
     exphbs = require('express-handlebars'),
+    cookie = require('cookie-parser'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     mongodb = require('mongodb'),
@@ -25,6 +26,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')))
 
 // middleware
+app.use(cookie());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -70,18 +72,15 @@ app.use((req, res, next) => {
     next()
 });
 
-// route files
-
+// routes
 
 index = require('./routes/index')
-const twin = app
-    // path
+social = require('./routes/social-user')
+local = require('./routes/local-user')
+
 app.use('/', index)
-    //app.use('/users', require('./routes/social-user'))
-
-app.use('/users', require('./routes/local-user'))
-
-
+app.use('/users', social)
+app.use('/users', local)
 
 
 const port = 3000

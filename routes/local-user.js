@@ -1,11 +1,10 @@
 const express = require('express'),
     passport = require('passport'),
     router = express.Router(),
-    pass = require('../auth/local-passport');
+    auth = require('../auth/passport-auth');
 
 // model
-
-const User = require('../model/local');
+const User = require('../model/providers');
 
 // Post login
 router.post('/login',
@@ -32,7 +31,7 @@ router.post('/register', (req, res) => {
             errors: error
         })
     } else {
-        User.findOne({ 'username': req.body.username }, (err, user, done) => {
+        User.findOne({ 'local.username': req.body.username }, (err, user, done) => {
             if (err) throw err;
             if (user) {
                 err_msg = [{ 'msg': 'Username already exist' }];
@@ -41,9 +40,10 @@ router.post('/register', (req, res) => {
                 })
             } else {
                 const newUser = new User()
-                newUser.email = req.body.email
-                newUser.username = req.body.username
-                newUser.password = req.body.password
+                newUser.local.email = req.body.email
+                newUser.local.username = req.body.username
+                newUser.local.password = req.body.password
+
                 User.createUser(newUser, (err, user) => {
                     if (err) throw err;
                     console.log(user)

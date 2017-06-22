@@ -1,13 +1,7 @@
 const express = require('express'),
     passport = require('passport'),
     router = express.Router(),
-    social = require('../auth/social-passport');
-
-
-// model
-const providers = require('../model/providers');
-//const Users = require('../model/local');
-
+    auth = require('../auth/passport-auth');
 
 // facebook
 router.get('/facebook/callback',

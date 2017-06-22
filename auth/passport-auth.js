@@ -1,7 +1,8 @@
 const passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
-    GoogleStrategy = require('passport-google-oauth20').Strategy;
+    GoogleStrategy = require('passport-google-oauth20').Strategy,
+    LocalStrategy = require('passport-local').Strategy;
 
 // model
 const providers = require('../model/providers');
@@ -88,7 +89,43 @@ passport.use(new GoogleStrategy({
         });
     }
 ));
+/* local  strategy*/
 
+passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
+    },
+    function(username, password, done) {
+        console.log(username)
+        providers.findOne({ 'local.username': username }, function(err, user) {
+            console.log(user.local.password)
+            if (err) {
+                console.log(err);
+                return done(err);
+            }
+            if (!user) {
+                console.log('unknown user')
+                return done(null, false, { message: 'unknow user' });
+
+            } else {
+                providers.validPassword(password, user.local.password, function(err, match) {
+                    // match === true 
+                    console.log(user.password)
+
+                    if (err) throw err;
+                    if (match) {
+                        console.log(user.email)
+                        return done(null, user)
+                    } else {
+                        console.log('incorrect password')
+                        return done(null, false, { message: 'Incorrect password.' })
+                    }
+                });
+            }
+
+        });
+    }
+));
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });

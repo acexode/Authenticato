@@ -31,8 +31,7 @@ function loggedIn(req, res, next) {
 
 }
 
-router.use('/users', require('./social-user'))
-    //logout
+//logout
 router.get('/users/logout', function(req, res) {
     req.logout();
     res.redirect('/');

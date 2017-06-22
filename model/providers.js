@@ -35,3 +35,25 @@ const providerSchema = mongoose.Schema({
 
 
 const providers = module.exports = mongoose.model('Provider', providerSchema)
+module.exports.getUser = (username, cb) => {
+    const query = { username: username }
+
+    providers.findOne(query, cb)
+}
+module.exports.createUser = (newUser, cb) => {
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.local.password, salt, function(err, hash) {
+            newUser.local.password = hash;
+            newUser.save(cb)
+
+
+        });
+    });
+}
+
+module.exports.validPassword = (password, hash, cb) => {
+    bcrypt.compare(password, hash, function(err, match) {
+        // if (err) throw err;
+        cb(null, match)
+    });
+}
