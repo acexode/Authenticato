@@ -1,4 +1,4 @@
-# Authenicato
+# Authenticato
 Authenticato is an authentication app built with Passportjs Authentication strategy and a super cool interface
 
 
