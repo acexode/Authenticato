@@ -1,4 +1,4 @@
-// hash password
+// db schema
 const mongoose = require('mongoose'),
     bcrypt = require('bcryptjs');
 
