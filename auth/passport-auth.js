@@ -1,3 +1,5 @@
+//passport fb, twitter, goog and local strategy
+
 const passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
