@@ -6,14 +6,17 @@ const passport = require('passport'),
     GoogleStrategy = require('passport-google-oauth20').Strategy,
     LocalStrategy = require('passport-local').Strategy;
 
+// configs
+config = require('./config')
+
 // model
 const providers = require('../model/providers');
 
 //facebook strategy
 passport.use(new FacebookStrategy({
-        clientID: '836470273168140',
-        clientSecret: '3f337fb136f5d43f3a1a89e26b3cfbb5',
-        callbackURL: "http://localhost:3000/users/facebook/callback",
+        clientID: config.facebook.clientID,
+        clientSecret: config.facebook.clientSecret,
+        callbackURL: config.facebook.callbackURL,
         profileFields: ['id', 'name', 'email', 'gender', 'displayName']
     },
     function(accessToken, refreshToken, profile, done) {
@@ -38,9 +41,9 @@ passport.use(new FacebookStrategy({
 
 // twitter Strategy
 passport.use(new TwitterStrategy({
-        consumerKey: 'cc2fDdjTifXj8Sao6ew6T4TWx',
-        consumerSecret: 'uTj6CtqgkR1soMwOKA7rt9HKOYK5ahPZ8nbQpj1xF4Vap0Q0GB',
-        callbackURL: "http://localhost:3000/users/twitter/callback"
+        consumerKey: config.twitter.consumerKey,
+        consumerSecret: config.twitter.consumerSecret,
+        callbackURL: config.twitter.callbackURL
     },
     function(token, tokenSecret, profile, done) {
         providers.findOne({ 'twitter.id': profile.id }, function(err, user) {
