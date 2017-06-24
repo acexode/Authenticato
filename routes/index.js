@@ -1,3 +1,5 @@
+//routes home page
+
 const express = require('express'),
     router = express.Router()
 
