@@ -69,9 +69,9 @@ passport.use(new TwitterStrategy({
 
 //google  Strategy
 passport.use(new GoogleStrategy({
-        clientID: '256025151636-rhkhde8vnq5s28or00um3mhtmc7j1n68.apps.googleusercontent.com',
-        clientSecret: 'w-xgz9JAcIiJY772xswwdeVU',
-        callbackURL: 'http://localhost:3000/users/google/callback'
+        clientID: config.google.clientID,
+        clientSecret: config.google.clientSecret,
+        callbackURL: config.google.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
         providers.findOne({ 'google.id': profile.id }, function(err, user) {
